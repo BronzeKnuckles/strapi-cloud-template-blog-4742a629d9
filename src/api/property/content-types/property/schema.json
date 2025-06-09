@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "properties",
+  "info": {
+    "singularName": "property",
+    "pluralName": "properties",
+    "displayName": "Property"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Slug": {
+      "type": "uid",
+      "targetField": "Title",
+      "required": true
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "Price": {
+      "type": "biginteger",
+      "required": true
+    },
+    "Location": {
+      "type": "string"
+    },
+    "Varas": {
+      "type": "integer"
+    },
+    "Manzana": {
+      "type": "integer"
+    },
+    "Bedrooms": {
+      "type": "integer"
+    },
+    "Bathrooms": {
+      "type": "integer"
+    },
+    "Featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "Images": {
+      "type": "media",
+      "multiple": true,
+      "required": false
+    }
+  }
+}
