@@ -601,7 +601,9 @@ export interface ApiPropertyProperty extends Struct.CollectionTypeSchema {
       > &
       Schema.Attribute.DefaultTo<'[]'>;
     Images: Schema.Attribute.Media<undefined, true>;
-    listing_type: Schema.Attribute.Enumeration<['For Sale', 'For Rent']>;
+    listing_type: Schema.Attribute.Enumeration<['For Sale', 'For Rent']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'For Sale'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

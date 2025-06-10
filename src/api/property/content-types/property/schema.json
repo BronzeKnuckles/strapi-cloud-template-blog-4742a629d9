@@ -65,6 +65,8 @@
     },
     "listing_type": {
       "type": "enumeration",
+      "required": true,
+      "default": "For Sale",
       "enum": [
         "For Sale",
         "For Rent"
