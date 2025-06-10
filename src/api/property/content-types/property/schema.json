@@ -50,6 +50,40 @@
       "type": "media",
       "multiple": true,
       "required": false
+    },
+    "Features": {
+      "type": "customField",
+      "customField": "plugin::multi-select.multi-select",
+      "default": "[]",
+      "options": [
+        "Access to Electricity ",
+        "Access to Water",
+        "Air Conditioning",
+        "Dryer ",
+        "Laundry"
+      ]
+    },
+    "listing_type": {
+      "type": "enumeration",
+      "enum": [
+        "For Sale",
+        "For Rent"
+      ]
+    },
+    "Comission": {
+      "type": "decimal"
+    },
+    "authorization_to_sell": {
+      "type": "boolean"
+    },
+    "type_of_use": {
+      "type": "enumeration",
+      "enum": [
+        "Apartment",
+        "House",
+        "Commercial",
+        "Land"
+      ]
     }
   }
 }
