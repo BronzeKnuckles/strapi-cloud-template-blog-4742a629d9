@@ -402,6 +402,34 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiAgentAgent extends Struct.CollectionTypeSchema {
+  collectionName: 'agents';
+  info: {
+    displayName: 'Agent';
+    pluralName: 'agents';
+    singularName: 'agent';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::agent.agent'> &
+      Schema.Attribute.Private;
+    properties: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::property.property'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
@@ -579,6 +607,7 @@ export interface ApiPropertyProperty extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    agent: Schema.Attribute.Relation<'manyToOne', 'api::agent.agent'>;
     authorization_to_sell: Schema.Attribute.Boolean;
     Bathrooms: Schema.Attribute.Integer;
     Bedrooms: Schema.Attribute.Integer;
@@ -1136,6 +1165,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::agent.agent': ApiAgentAgent;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
