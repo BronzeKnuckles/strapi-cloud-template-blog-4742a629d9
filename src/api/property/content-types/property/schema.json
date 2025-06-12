@@ -86,6 +86,12 @@
         "Commercial",
         "Land"
       ]
+    },
+    "agent_profile": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::agent-profile.agent-profile",
+      "inversedBy": "properties"
     }
   }
 }

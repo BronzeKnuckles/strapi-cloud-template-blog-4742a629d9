@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "agent_profiles",
+  "info": {
+    "singularName": "agent-profile",
+    "pluralName": "agent-profiles",
+    "displayName": "Agent Profile"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "agent_profile"
+    },
+    "phone_number": {
+      "type": "biginteger"
+    },
+    "properties": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::property.property",
+      "mappedBy": "agent_profile"
+    }
+  }
+}

@@ -402,6 +402,43 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiAgentProfileAgentProfile
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'agent_profiles';
+  info: {
+    displayName: 'Agent Profile';
+    pluralName: 'agent-profiles';
+    singularName: 'agent-profile';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::agent-profile.agent-profile'
+    > &
+      Schema.Attribute.Private;
+    phone_number: Schema.Attribute.BigInteger;
+    properties: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::property.property'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
@@ -579,6 +616,10 @@ export interface ApiPropertyProperty extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    agent_profile: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::agent-profile.agent-profile'
+    >;
     authorization_to_sell: Schema.Attribute.Boolean;
     Bathrooms: Schema.Attribute.Integer;
     Bedrooms: Schema.Attribute.Integer;
@@ -1083,6 +1124,10 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
+    agent_profile: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::agent-profile.agent-profile'
+    >;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1135,6 +1180,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::agent-profile.agent-profile': ApiAgentProfileAgentProfile;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
